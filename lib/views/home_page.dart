@@ -46,7 +46,7 @@ class HomePage extends GetView<IsarService> {
               title: Text(item.article!),
               subtitle: Text(item.type!),
               trailing: IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
+                icon: const Icon(Icons.delete, color: Colors.deepOrange),
                 onPressed: () => controller.deleteIsar(item),
               ),
               onTap: () {
