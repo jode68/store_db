@@ -17,13 +17,13 @@ class DetailPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(item.article!, style: const TextStyle(fontSize: 32)),
-            Text(item.type!, style: const TextStyle(fontSize: 32)),
-            Text(item.description!, style: const TextStyle(fontSize: 32)),
+            Text(item.article, style: const TextStyle(fontSize: 32)),
+            Text(item.type, style: const TextStyle(fontSize: 32)),
+            Text(item.description, style: const TextStyle(fontSize: 32)),
             Text(item.quantity.toString(),
                 style: const TextStyle(fontSize: 32)),
-            Text(item.foto!, style: const TextStyle(fontSize: 32)),
-            Text(item.image!, style: const TextStyle(fontSize: 32)),
+            Text(item.foto, style: const TextStyle(fontSize: 32)),
+            Text(item.image, style: const TextStyle(fontSize: 32)),
           ],
         ),
       ),

@@ -68,36 +68,11 @@ int _dataBaseEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.article;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.description;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.foto;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.image;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.type;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
+  bytesCount += 3 + object.article.length * 3;
+  bytesCount += 3 + object.description.length * 3;
+  bytesCount += 3 + object.foto.length * 3;
+  bytesCount += 3 + object.image.length * 3;
+  bytesCount += 3 + object.type.length * 3;
   return bytesCount;
 }
 
@@ -121,14 +96,15 @@ DataBase _dataBaseDeserialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = DataBase();
-  object.article = reader.readStringOrNull(offsets[0]);
-  object.description = reader.readStringOrNull(offsets[1]);
-  object.foto = reader.readStringOrNull(offsets[2]);
+  final object = DataBase(
+    article: reader.readString(offsets[0]),
+    description: reader.readString(offsets[1]),
+    foto: reader.readString(offsets[2]),
+    image: reader.readString(offsets[3]),
+    quantity: reader.readLong(offsets[4]),
+    type: reader.readString(offsets[5]),
+  );
   object.id = id;
-  object.image = reader.readStringOrNull(offsets[3]);
-  object.quantity = reader.readLongOrNull(offsets[4]);
-  object.type = reader.readStringOrNull(offsets[5]);
   return object;
 }
 
@@ -140,17 +116,17 @@ P _dataBaseDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 1:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 2:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 4:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -245,24 +221,8 @@ extension DataBaseQueryWhere on QueryBuilder<DataBase, DataBase, QWhereClause> {
 
 extension DataBaseQueryFilter
     on QueryBuilder<DataBase, DataBase, QFilterCondition> {
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> articleIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'article',
-      ));
-    });
-  }
-
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> articleIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'article',
-      ));
-    });
-  }
-
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> articleEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -275,7 +235,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> articleGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -290,7 +250,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> articleLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -305,8 +265,8 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> articleBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -391,25 +351,8 @@ extension DataBaseQueryFilter
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> descriptionIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'description',
-      ));
-    });
-  }
-
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition>
-      descriptionIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'description',
-      ));
-    });
-  }
-
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> descriptionEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -423,7 +366,7 @@ extension DataBaseQueryFilter
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition>
       descriptionGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -438,7 +381,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> descriptionLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -453,8 +396,8 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> descriptionBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -540,24 +483,8 @@ extension DataBaseQueryFilter
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> fotoIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'foto',
-      ));
-    });
-  }
-
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> fotoIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'foto',
-      ));
-    });
-  }
-
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> fotoEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -570,7 +497,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> fotoGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -585,7 +512,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> fotoLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -600,8 +527,8 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> fotoBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -738,24 +665,8 @@ extension DataBaseQueryFilter
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> imageIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'image',
-      ));
-    });
-  }
-
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> imageIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'image',
-      ));
-    });
-  }
-
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> imageEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -768,7 +679,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> imageGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -783,7 +694,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> imageLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -798,8 +709,8 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> imageBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -884,24 +795,8 @@ extension DataBaseQueryFilter
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> quantityIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'quantity',
-      ));
-    });
-  }
-
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> quantityIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'quantity',
-      ));
-    });
-  }
-
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> quantityEqualTo(
-      int? value) {
+      int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'quantity',
@@ -911,7 +806,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> quantityGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -924,7 +819,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> quantityLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -937,8 +832,8 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> quantityBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -953,24 +848,8 @@ extension DataBaseQueryFilter
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> typeIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'type',
-      ));
-    });
-  }
-
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> typeIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'type',
-      ));
-    });
-  }
-
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> typeEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -983,7 +862,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> typeGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -998,7 +877,7 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> typeLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1013,8 +892,8 @@ extension DataBaseQueryFilter
   }
 
   QueryBuilder<DataBase, DataBase, QAfterFilterCondition> typeBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1319,37 +1198,37 @@ extension DataBaseQueryProperty
     });
   }
 
-  QueryBuilder<DataBase, String?, QQueryOperations> articleProperty() {
+  QueryBuilder<DataBase, String, QQueryOperations> articleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'article');
     });
   }
 
-  QueryBuilder<DataBase, String?, QQueryOperations> descriptionProperty() {
+  QueryBuilder<DataBase, String, QQueryOperations> descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
     });
   }
 
-  QueryBuilder<DataBase, String?, QQueryOperations> fotoProperty() {
+  QueryBuilder<DataBase, String, QQueryOperations> fotoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'foto');
     });
   }
 
-  QueryBuilder<DataBase, String?, QQueryOperations> imageProperty() {
+  QueryBuilder<DataBase, String, QQueryOperations> imageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'image');
     });
   }
 
-  QueryBuilder<DataBase, int?, QQueryOperations> quantityProperty() {
+  QueryBuilder<DataBase, int, QQueryOperations> quantityProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'quantity');
     });
   }
 
-  QueryBuilder<DataBase, String?, QQueryOperations> typeProperty() {
+  QueryBuilder<DataBase, String, QQueryOperations> typeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'type');
     });

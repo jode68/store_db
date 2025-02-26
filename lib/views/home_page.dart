@@ -28,13 +28,14 @@ class HomePage extends GetView<IsarService> {
           child: const Icon(Icons.add),
           onPressed: () {
             controller.saveIsar(
-              DataBase()
-                ..article = 'article'
-                ..type = 'type'
-                ..description = 'description'
-                ..quantity = 1
-                ..foto = 'foto'
-                ..image = 'image',
+              DataBase(
+                article: 'article',
+                type: 'type',
+                description: 'description',
+                quantity: 0,
+                foto: 'foto',
+                image: 'image',
+              ),
             );
           },
         ),
@@ -43,8 +44,8 @@ class HomePage extends GetView<IsarService> {
           itemBuilder: (context, index) {
             final item = lista[index];
             return ListTile(
-              title: Text(item.article!),
-              subtitle: Text(item.type!),
+              title: Text(item.article),
+              subtitle: Text(item.type),
               trailing: IconButton(
                 icon: const Icon(Icons.delete, color: Colors.deepOrange),
                 onPressed: () => controller.deleteIsar(item),
