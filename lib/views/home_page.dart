@@ -9,7 +9,7 @@ class HomePage extends GetView<IsarService> {
 
   @override
   Widget build(BuildContext context) {
-    final lista = controller.dataBase;
+    final listData = controller.dataBase;
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
@@ -38,18 +38,18 @@ class HomePage extends GetView<IsarService> {
           },
         ),
         body: ListView.builder(
-          itemCount: lista.length,
+          itemCount: listData.length,
           itemBuilder: (context, index) {
-            final item = lista[index];
+            final itemData = listData[index];
             return ListTile(
-              title: Text(item.article),
-              subtitle: Text(item.type),
+              title: Text(itemData.article),
+              subtitle: Text(itemData.type),
               trailing: IconButton(
                 icon: const Icon(Icons.delete, color: Colors.deepOrange),
-                onPressed: () => controller.deleteIsar(item),
+                onPressed: () => controller.deleteIsar(itemData),
               ),
               onTap: () {
-                Get.toNamed(Routes.detailPage, arguments: item);
+                Get.toNamed(Routes.detailPage, arguments: itemData);
               },
             );
           },

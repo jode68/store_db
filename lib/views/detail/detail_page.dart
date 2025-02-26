@@ -7,7 +7,7 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataBase item = Get.arguments;
+    DataBase itemData = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         title: const Text('DetailPage'),
@@ -17,13 +17,13 @@ class DetailPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(item.article, style: const TextStyle(fontSize: 32)),
-            Text(item.type, style: const TextStyle(fontSize: 32)),
-            Text(item.description, style: const TextStyle(fontSize: 32)),
-            Text(item.quantity.toString(),
+            Text(itemData.article, style: const TextStyle(fontSize: 32)),
+            Text(itemData.type, style: const TextStyle(fontSize: 32)),
+            Text(itemData.description, style: const TextStyle(fontSize: 32)),
+            Text(itemData.quantity.toString(),
                 style: const TextStyle(fontSize: 32)),
-            Text(item.foto, style: const TextStyle(fontSize: 32)),
-            Text(item.scheme, style: const TextStyle(fontSize: 32)),
+            Text(itemData.foto, style: const TextStyle(fontSize: 32)),
+            Text(itemData.scheme, style: const TextStyle(fontSize: 32)),
           ],
         ),
       ),
