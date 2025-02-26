@@ -23,7 +23,7 @@ class DetailPage extends StatelessWidget {
             Text(item.quantity.toString(),
                 style: const TextStyle(fontSize: 32)),
             Text(item.foto, style: const TextStyle(fontSize: 32)),
-            Text(item.image, style: const TextStyle(fontSize: 32)),
+            Text(item.scheme, style: const TextStyle(fontSize: 32)),
           ],
         ),
       ),
