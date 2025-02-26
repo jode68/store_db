@@ -33,8 +33,6 @@ class HomePage extends GetView<IsarService> {
                 type: 'type',
                 description: 'description',
                 quantity: 0,
-                foto: 'foto',
-                image: 'image',
               ),
             );
           },

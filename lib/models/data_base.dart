@@ -17,7 +17,7 @@ class DataBase {
     required this.type,
     required this.description,
     required this.quantity,
-    required this.foto,
-    required this.image,
+    this.foto = '',
+    this.image = '',
   });
 }

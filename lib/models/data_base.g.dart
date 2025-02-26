@@ -99,8 +99,8 @@ DataBase _dataBaseDeserialize(
   final object = DataBase(
     article: reader.readString(offsets[0]),
     description: reader.readString(offsets[1]),
-    foto: reader.readString(offsets[2]),
-    image: reader.readString(offsets[3]),
+    foto: reader.readStringOrNull(offsets[2]) ?? '',
+    image: reader.readStringOrNull(offsets[3]) ?? '',
     quantity: reader.readLong(offsets[4]),
     type: reader.readString(offsets[5]),
   );
@@ -120,9 +120,9 @@ P _dataBaseDeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset) ?? '') as P;
     case 3:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset) ?? '') as P;
     case 4:
       return (reader.readLong(offset)) as P;
     case 5:
