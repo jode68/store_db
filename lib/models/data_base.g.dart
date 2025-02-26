@@ -37,9 +37,9 @@ const DataBaseSchema = CollectionSchema(
       name: r'quantity',
       type: IsarType.long,
     ),
-    r'scheme': PropertySchema(
+    r'sheet': PropertySchema(
       id: 4,
-      name: r'scheme',
+      name: r'sheet',
       type: IsarType.string,
     ),
     r'type': PropertySchema(
@@ -71,7 +71,7 @@ int _dataBaseEstimateSize(
   bytesCount += 3 + object.article.length * 3;
   bytesCount += 3 + object.description.length * 3;
   bytesCount += 3 + object.foto.length * 3;
-  bytesCount += 3 + object.scheme.length * 3;
+  bytesCount += 3 + object.sheet.length * 3;
   bytesCount += 3 + object.type.length * 3;
   return bytesCount;
 }
@@ -86,7 +86,7 @@ void _dataBaseSerialize(
   writer.writeString(offsets[1], object.description);
   writer.writeString(offsets[2], object.foto);
   writer.writeLong(offsets[3], object.quantity);
-  writer.writeString(offsets[4], object.scheme);
+  writer.writeString(offsets[4], object.sheet);
   writer.writeString(offsets[5], object.type);
 }
 
@@ -101,7 +101,7 @@ DataBase _dataBaseDeserialize(
     description: reader.readString(offsets[1]),
     foto: reader.readStringOrNull(offsets[2]) ?? '',
     quantity: reader.readLong(offsets[3]),
-    scheme: reader.readStringOrNull(offsets[4]) ?? '',
+    sheet: reader.readStringOrNull(offsets[4]) ?? '',
     type: reader.readString(offsets[5]),
   );
   object.id = id;
@@ -718,20 +718,20 @@ extension DataBaseQueryFilter
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeEqualTo(
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'scheme',
+        property: r'sheet',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeGreaterThan(
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -739,14 +739,14 @@ extension DataBaseQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'scheme',
+        property: r'sheet',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeLessThan(
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -754,14 +754,14 @@ extension DataBaseQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'scheme',
+        property: r'sheet',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeBetween(
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -770,7 +770,7 @@ extension DataBaseQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'scheme',
+        property: r'sheet',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -780,69 +780,69 @@ extension DataBaseQueryFilter
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeStartsWith(
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'scheme',
+        property: r'sheet',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeEndsWith(
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'scheme',
+        property: r'sheet',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeContains(
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'scheme',
+        property: r'sheet',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeMatches(
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'scheme',
+        property: r'sheet',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeIsEmpty() {
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'scheme',
+        property: r'sheet',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> schemeIsNotEmpty() {
+  QueryBuilder<DataBase, DataBase, QAfterFilterCondition> sheetIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'scheme',
+        property: r'sheet',
         value: '',
       ));
     });
@@ -1034,15 +1034,15 @@ extension DataBaseQuerySortBy on QueryBuilder<DataBase, DataBase, QSortBy> {
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterSortBy> sortByScheme() {
+  QueryBuilder<DataBase, DataBase, QAfterSortBy> sortBySheet() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'scheme', Sort.asc);
+      return query.addSortBy(r'sheet', Sort.asc);
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterSortBy> sortBySchemeDesc() {
+  QueryBuilder<DataBase, DataBase, QAfterSortBy> sortBySheetDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'scheme', Sort.desc);
+      return query.addSortBy(r'sheet', Sort.desc);
     });
   }
 
@@ -1121,15 +1121,15 @@ extension DataBaseQuerySortThenBy
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterSortBy> thenByScheme() {
+  QueryBuilder<DataBase, DataBase, QAfterSortBy> thenBySheet() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'scheme', Sort.asc);
+      return query.addSortBy(r'sheet', Sort.asc);
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QAfterSortBy> thenBySchemeDesc() {
+  QueryBuilder<DataBase, DataBase, QAfterSortBy> thenBySheetDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'scheme', Sort.desc);
+      return query.addSortBy(r'sheet', Sort.desc);
     });
   }
 
@@ -1175,10 +1175,10 @@ extension DataBaseQueryWhereDistinct
     });
   }
 
-  QueryBuilder<DataBase, DataBase, QDistinct> distinctByScheme(
+  QueryBuilder<DataBase, DataBase, QDistinct> distinctBySheet(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'scheme', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'sheet', caseSensitive: caseSensitive);
     });
   }
 
@@ -1222,9 +1222,9 @@ extension DataBaseQueryProperty
     });
   }
 
-  QueryBuilder<DataBase, String, QQueryOperations> schemeProperty() {
+  QueryBuilder<DataBase, String, QQueryOperations> sheetProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'scheme');
+      return query.addPropertyName(r'sheet');
     });
   }
 

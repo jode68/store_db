@@ -10,7 +10,7 @@ class DataBase {
   String description;
   int quantity;
   String foto;
-  String scheme;
+  String sheet;
 
   DataBase({
     required this.article,
@@ -18,6 +18,6 @@ class DataBase {
     required this.description,
     required this.quantity,
     this.foto = '',
-    this.scheme = '',
+    this.sheet = '',
   });
 }
