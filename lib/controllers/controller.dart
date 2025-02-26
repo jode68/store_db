@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:isar/isar.dart';
 import 'package:store_db/models/data_base.dart';
 import 'package:store_db/services/isar_service.dart';
 
 class Controller extends GetxController {
-  final isar = Get.find<IsarService>();
+  final isarController = Get.find<IsarService>();
+  final isar = IsarService().isar;
 
   final articleEdit = TextEditingController();
   final typeEdit = TextEditingController();
@@ -36,7 +38,7 @@ class Controller extends GetxController {
         sheet: sheet,
       );
 
-      isar.saveIsar(dataBase);
+      isarController.saveIsar(dataBase);
 
       articleEdit.clear();
       typeEdit.clear();
@@ -55,37 +57,44 @@ class Controller extends GetxController {
     fotoEdit.text = data.foto;
     sheetEdit.text = data.sheet;
 
-    isar.deleteIsar(data);
+    isarController.deleteIsar(data);
 
     addArticle();
   }
 
   void deleteArticle(DataBase data) {
-    isar.deleteIsar(data);
+    isarController.deleteIsar(data);
   }
 
   void clearArticle() {
-    isar.clearIsar();
+    isarController.clearIsar();
   }
 
   void sortByArticle() {
-    final data = isar.dataBase.map((value) => value).toList();
+    final data = isarController.dataBase.map((value) => value).toList();
     data.sort((a, b) => a.article.compareTo(b.article));
-    isar.dataBase.value = data;
-    isar.dataBase.refresh();
+    isarController.dataBase.value = data;
+    isarController.dataBase.refresh();
   }
 
   void sortByType() {
-    final data = isar.dataBase.map((value) => value).toList();
+    final data = isarController.dataBase.map((value) => value).toList();
     data.sort((a, b) => a.type.compareTo(b.type));
-    isar.dataBase.value = data;
-    isar.dataBase.refresh();
+    isarController.dataBase.value = data;
+    isarController.dataBase.refresh();
   }
 
   void searchArticle(String name) {
-    final data = isar.dataBase.map((value) => value).toList();
-    isar.dataBase.value =
+    final data = isarController.dataBase.map((value) => value).toList();
+    isarController.dataBase.value =
         data.where((element) => element.article.contains(name)).toList();
-    isar.dataBase.refresh();
+    isarController.dataBase.refresh();
+  }
+
+  void searchName(String name) {
+    isar.dataBases.filter().typeEqualTo(name).findAll().then((value) {
+      isarController.dataBase.value = value;
+      isarController.dataBase.refresh();
+    });
   }
 }
