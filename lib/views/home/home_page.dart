@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:store_db/controllers/controller.dart';
 import 'package:store_db/models/data_base.dart';
+import 'package:store_db/routes/routes.dart';
 import 'package:store_db/services/isar_service.dart';
 
 class HomePage extends GetView<IsarService> {
@@ -49,9 +50,12 @@ class HomePage extends GetView<IsarService> {
                 icon: const Icon(Icons.delete, color: Colors.deepOrange),
                 onPressed: () => controller.deleteIsar(itemData),
               ),
+              leading: IconButton(
+                icon: const Icon(Icons.edit, color: Colors.deepPurple),
+                onPressed: () => addWidget(itemData),
+              ),
               onTap: () {
-                //Get.toNamed(Routes.detailPage, arguments: itemData);
-                addWidget(itemData);
+                Get.toNamed(Routes.detailPage, arguments: itemData);
               },
             );
           },
