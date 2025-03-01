@@ -51,7 +51,7 @@ class HomePage extends GetView<IsarService> {
                 onPressed: () => controller.deleteIsar(itemData),
               ),
               leading: IconButton(
-                icon: const Icon(Icons.edit, color: Colors.deepPurple),
+                icon: const Icon(Icons.edit, color: Colors.white),
                 onPressed: () => addWidget(itemData),
               ),
               onTap: () => Get.toNamed(Routes.detailPage, arguments: itemData),
