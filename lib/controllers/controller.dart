@@ -6,7 +6,6 @@ import 'package:store_db/services/isar_service.dart';
 
 class Controller extends GetxController {
   final isarController = Get.find<IsarService>();
-  final isar = IsarService().isar;
 
   final articleEdit = TextEditingController();
   final typeEdit = TextEditingController();
@@ -38,7 +37,8 @@ class Controller extends GetxController {
         sheet: sheet,
       );
 
-      isarController.saveIsar(dataBase);
+      isarController.dataBase.add(dataBase);
+      isarController.saveAllIsar();
 
       articleEdit.clear();
       typeEdit.clear();
@@ -50,49 +50,35 @@ class Controller extends GetxController {
   }
 
   void updateArticle(DataBase data) {
-    articleEdit.text = data.article;
-    typeEdit.text = data.type;
-    descriptionEdit.text = data.description;
-    quantityEdit.text = data.quantity.toString();
-    fotoEdit.text = data.foto;
-    sheetEdit.text = data.sheet;
+    isarController.isar!.writeTxnSync(() {
+      final isarData = isarController.isar!.dataBases.getSync(data.id);
 
-    isarController.deleteIsar(data);
+      isarData!.article = articleEdit.value.text;
+      isarData.type = typeEdit.value.text;
+      isarData.description = descriptionEdit.value.text;
+      isarData.quantity = int.parse(quantityEdit.value.text);
+      isarData.foto = fotoEdit.value.text;
+      isarData.sheet = sheetEdit.value.text;
 
-    addArticle();
+      isarController.isar!.dataBases.putSync(isarData);
+    });
+    isarController.getIsar();
   }
 
-  void deleteArticle(DataBase data) {
-    isarController.deleteIsar(data);
-  }
-
-  void clearArticle() {
-    isarController.clearIsar();
-  }
-
-  void sortByArticle() {
-    final data = isarController.dataBase.map((value) => value).toList();
-    data.sort((a, b) => a.article.compareTo(b.article));
+  void sortToggle() {
+    final data = isarController.dataBase.reversed.toList();
     isarController.dataBase.value = data;
     isarController.dataBase.refresh();
   }
 
-  void sortByType() {
-    final data = isarController.dataBase.map((value) => value).toList();
-    data.sort((a, b) => a.type.compareTo(b.type));
-    isarController.dataBase.value = data;
-    isarController.dataBase.refresh();
-  }
-
-  void searchArticle(String name) {
-    final data = isarController.dataBase.map((value) => value).toList();
-    isarController.dataBase.value =
-        data.where((element) => element.article.contains(name)).toList();
+  void sortList() {
+    isarController.dataBase.sort((a, b) => a.article.compareTo(b.article));
     isarController.dataBase.refresh();
   }
 
   void searchName(String name) {
-    isar.dataBases.filter().typeEqualTo(name).findAll().then((value) {
+    final isar = IsarService().isar;
+    isar!.dataBases.filter().typeEqualTo(name).findAll().then((value) {
       isarController.dataBase.value = value;
       isarController.dataBase.refresh();
     });
