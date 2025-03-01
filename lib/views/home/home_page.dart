@@ -54,9 +54,7 @@ class HomePage extends GetView<IsarService> {
                 icon: const Icon(Icons.edit, color: Colors.deepPurple),
                 onPressed: () => addWidget(itemData),
               ),
-              onTap: () {
-                Get.toNamed(Routes.detailPage, arguments: itemData);
-              },
+              onTap: () => Get.toNamed(Routes.detailPage, arguments: itemData),
             );
           },
         ),
