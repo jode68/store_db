@@ -38,7 +38,7 @@ class Controller extends GetxController {
       );
 
       isarController.dataBase.add(dataBase);
-      isarController.saveAllIsar();
+      isarController.saveIsar();
 
       articleEdit.clear();
       typeEdit.clear();

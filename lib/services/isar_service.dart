@@ -24,7 +24,7 @@ class IsarService extends GetxController {
     dataBase.refresh();
   }
 
-  Future<void> saveAllIsar() async {
+  Future<void> saveIsar() async {
     await isar!.writeTxn(() async {
       await isar!.dataBases.putAll(dataBase);
     });
@@ -47,7 +47,7 @@ class IsarService extends GetxController {
 
   void saveDemoList() async {
     dataBase.addAll(demoList);
-    await saveAllIsar();
+    await saveIsar();
   }
 }
 
