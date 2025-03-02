@@ -80,7 +80,7 @@ class Controller extends GetxController {
     final isar = IsarService().isar;
     isar!.dataBases.filter().typeEqualTo(name).findAll().then((value) {
       isarController.dataBase.value = value;
-      isarController.dataBase.refresh();
     });
+    isarController.dataBase.refresh();
   }
 }
