@@ -54,7 +54,7 @@ class IsarService extends GetxController {
 final demoList = [
   DataBase(
     article: 'Article 1',
-    type: 'Type 1',
+    type: 'Type A',
     description: 'Description 1',
     quantity: 1,
     foto: 'Foto 1',
@@ -62,7 +62,7 @@ final demoList = [
   ),
   DataBase(
     article: 'Article 2',
-    type: 'Type 2',
+    type: 'Type A',
     description: 'Description 2',
     quantity: 2,
     foto: 'Foto 2',
@@ -70,7 +70,7 @@ final demoList = [
   ),
   DataBase(
     article: 'Article 3',
-    type: 'Type 3',
+    type: 'Type B',
     description: 'Description 3',
     quantity: 3,
     foto: 'Foto 3',
@@ -78,7 +78,7 @@ final demoList = [
   ),
   DataBase(
     article: 'Article 4',
-    type: 'Type 4',
+    type: 'Type A',
     description: 'Description 4',
     quantity: 4,
     foto: 'Foto 4',
@@ -86,7 +86,7 @@ final demoList = [
   ),
   DataBase(
     article: 'Article 5',
-    type: 'Type 5',
+    type: 'Type C',
     description: 'Description 5',
     quantity: 5,
     foto: 'Foto 5',
@@ -94,7 +94,7 @@ final demoList = [
   ),
   DataBase(
     article: 'Article 6',
-    type: 'Type 6',
+    type: 'Type D',
     description: 'Description 6',
     quantity: 6,
     foto: 'Foto 6',
@@ -102,7 +102,7 @@ final demoList = [
   ),
   DataBase(
     article: 'Article 7',
-    type: 'Type 7',
+    type: 'Type B',
     description: 'Description 7',
     quantity: 7,
     foto: 'Foto 7',
@@ -110,7 +110,7 @@ final demoList = [
   ),
   DataBase(
     article: 'Article 8',
-    type: 'Type 8',
+    type: 'Type C',
     description: 'Description 8',
     quantity: 8,
     foto: 'Foto 8',
