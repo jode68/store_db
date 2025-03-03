@@ -46,6 +46,7 @@ class IsarService extends GetxController {
   }
 
   void saveDemoList() async {
+    dataBase.clear();
     dataBase.addAll(demoList);
     await saveIsar();
   }
