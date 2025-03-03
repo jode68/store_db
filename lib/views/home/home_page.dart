@@ -12,6 +12,7 @@ class HomePage extends GetView<IsarService> {
   Widget build(BuildContext context) {
     final operation = Get.find<Controller>();
     final listData = controller.dataBase;
+    bool menuFull = false;
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
@@ -29,24 +30,39 @@ class HomePage extends GetView<IsarService> {
               icon: const Icon(Icons.search, color: Colors.deepPurple),
               onPressed: () => operation.sortToggle(),
             ),
-            PopupMenuButton(
-              child: const Icon(Icons.menu, color: Colors.deepPurple),
-              itemBuilder: (context) {
-                final menuList = listData.map((e) => e.type).toSet().toList();
-                return [
-                  PopupMenuItem(
-                    child: Text('All Item'),
-                    onTap: () => controller.getIsar(),
-                  ),
-                  for (int i = 0; i < menuList.length; i++)
+            if (menuFull == false)
+              PopupMenuButton(
+                child: const Icon(Icons.menu, color: Colors.deepPurple),
+                itemBuilder: (context) {
+                  final menuList = listData.map((e) => e.type).toSet().toList();
+                  return [
+                    for (int i = 0; i < menuList.length; i++)
+                      PopupMenuItem(
+                        value: i,
+                        child: Text(menuList[i]),
+                        onTap: () {
+                          operation.searchName(menuList[i]);
+                          menuFull = true;
+                        },
+                      ),
+                  ];
+                },
+              ),
+            if (menuFull == true)
+              PopupMenuButton(
+                child: const Icon(Icons.menu, color: Colors.deepPurple),
+                itemBuilder: (context) {
+                  return [
                     PopupMenuItem(
-                      value: i,
-                      child: Text(menuList[i]),
-                      onTap: () => operation.searchName(menuList[i]),
+                      child: Text('All Item'),
+                      onTap: () {
+                        controller.getIsar();
+                        menuFull = false;
+                      },
                     ),
-                ];
-              },
-            ),
+                  ];
+                },
+              ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
